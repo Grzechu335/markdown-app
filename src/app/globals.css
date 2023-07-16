@@ -2,26 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer utilities {
+    .heading-md {
+        @apply font-sans text-[15px] font-normal text-700;
+    }
+    .heading-sm {
+        @apply font-sans text-[14px] tracking-[2px] font-medium text-700;
+    }
+    .body-md {
+        @apply font-sans text-[13px] font-light text-700;
+    }
+    .preview-h1 {
+        @apply font-slab text-[32px] font-bold text-700;
+    }
+    .preview-h2 {
+        @apply font-slab text-[28px] font-light text-700;
+    }
+    .preview-h3 {
+        @apply font-slab text-[24px] font-bold text-700;
+    }
+    .preview-h4 {
+        @apply font-slab text-[20px] font-bold text-700;
+    }
+    .preview-h5 {
+        @apply font-slab text-[16px] font-bold text-700;
+    }
+    .preview-h6 {
+        @apply font-slab text-[16px] font-bold text-orange;
+    }
+    .preview-p {
+        @apply font-slab text-[14px] leading-[24px] font-normal;
+    }
+    .preview-p-bold {
+        @apply font-slab text-[14px] leading-[24px] font-bold;
+    }
+    .markdown-mono {
+        @apply font-mono text-[14px] leading-[24px] font-normal;
+    }
 }
