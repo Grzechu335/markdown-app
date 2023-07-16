@@ -1,7 +1,9 @@
 import Header from '@/components/templates/Header'
-import './globals.css'
+import SidebarWrapper from '@/components/templates/SidebarWrapper'
 import type { Metadata } from 'next'
 import { Roboto, Roboto_Mono, Roboto_Slab } from 'next/font/google'
+import Providers from '../../providers/Providers'
+import './globals.css'
 
 const robotoRegular = Roboto({
     subsets: ['latin'],
@@ -34,10 +36,14 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${robotoRegular.variable} ${robotoSlab.variable} ${robotoMono.variable}`}
+                className={`${robotoRegular.variable} ${robotoSlab.variable} ${robotoMono.variable}
+                `}
             >
-                <Header />
-                {children}
+                <Providers>
+                    <Header />
+                    <SidebarWrapper />
+                    <div className="mt-[56px] md:mt-[72px]">{children}</div>
+                </Providers>
             </body>
         </html>
     )

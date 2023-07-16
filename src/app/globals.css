@@ -2,41 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    body {
+        @apply overflow-x-hidden bg-100 dark:bg-1000;
+    }
+}
+
 @layer utilities {
     .heading-md {
-        @apply font-sans text-[15px] font-normal text-700;
+        @apply font-sans text-[15px] font-normal;
     }
     .heading-sm {
-        @apply font-sans text-[14px] tracking-[2px] font-medium text-700;
+        @apply font-sans text-[14px] tracking-[2px] font-medium;
     }
     .body-md {
-        @apply font-sans text-[13px] font-light text-700;
+        @apply font-sans text-[13px] font-light;
     }
     .preview-h1 {
-        @apply font-slab text-[32px] font-bold text-700;
+        @apply font-slab text-[32px] font-bold;
     }
     .preview-h2 {
-        @apply font-slab text-[28px] font-light text-700;
+        @apply font-slab text-[28px] font-light;
     }
     .preview-h3 {
-        @apply font-slab text-[24px] font-bold text-700;
+        @apply font-slab text-[24px] font-bold;
     }
     .preview-h4 {
-        @apply font-slab text-[20px] font-bold text-700;
+        @apply font-slab text-[20px] font-bold;
     }
     .preview-h5 {
-        @apply font-slab text-[16px] font-bold text-700;
+        @apply font-slab text-[16px] font-bold;
     }
     .preview-h6 {
-        @apply font-slab text-[16px] font-bold text-orange;
+        @apply font-slab text-[16px] font-bold;
     }
     .preview-p {
-        @apply font-slab text-[14px] leading-[24px] font-normal;
+        @apply font-slab text-[14px] leading-[24px];
     }
     .preview-p-bold {
-        @apply font-slab text-[14px] leading-[24px] font-bold;
+        @apply font-slab text-[14px] leading-[24px];
     }
     .markdown-mono {
-        @apply font-mono text-[14px] leading-[24px] font-normal;
+        @apply font-mono text-[14px] leading-[24px];
     }
 }

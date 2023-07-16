@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    darkMode: 'class',
     content: [
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,7 +8,7 @@ module.exports = {
     ],
     theme: {
         screens: {
-            md: '375px',
+            md: '435px',
             lg: '768px',
         },
         extend: {
@@ -32,5 +33,5 @@ module.exports = {
             },
         },
     },
-    plugins: [],
+    plugins: [require('tailwind-scrollbar')],
 }
