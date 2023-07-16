@@ -15,7 +15,7 @@ import CustomButton from '../atoms/CustomButton'
 const Header: React.FC = () => {
     const { toggleMenu, open } = useSidebarContext()
     return (
-        <header className="fixed left-0 top-0 right-0 h-[56px] md:h-[72px] bg-800 flex justify-between">
+        <header className="fixed left-0 top-0 right-0 h-[56px] md:h-[72px] bg-800 flex justify-between z-2">
             <div
                 className={clsxm(
                     'flex space-x-3 md:space-x-6 transition-all duration-200',
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
                 {!open && (
                     <m.div
                         initial={{

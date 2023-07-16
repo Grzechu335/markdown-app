@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
                     </CustomButton>
                     <Documents />
                 </div>
-                <ThemeSwitch className="flex items-center space-x-[12px]" />
+                <ThemeSwitch className="flex items-center space-x-[12px] mb-28 md:mb-0" />
             </div>
         </m.aside>
     )
