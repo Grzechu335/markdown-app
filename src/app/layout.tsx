@@ -26,6 +26,10 @@ const robotoMono = Roboto_Mono({
 export const metadata: Metadata = {
     title: 'Markdown App',
     description: 'Designed by Frontend Mentor, coded by Grzegorz Skrabucha',
+    other: {
+        viewport:
+            'width=device-width, initial-scale-1, maximum-scale=1, user-scalable=0',
+    },
 }
 
 export default function RootLayout({

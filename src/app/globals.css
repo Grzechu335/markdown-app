@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply overflow-x-hidden bg-100 dark:bg-1000;
+        @apply overflow-hidden bg-100 dark:bg-1000;
     }
 }
 
@@ -19,30 +19,70 @@
         @apply font-sans text-[13px] font-light;
     }
     .preview-h1 {
-        @apply font-slab text-[32px] font-bold;
+        @apply font-slab text-[32px] font-bold mb-[20px] dark:text-100 text-700;
     }
     .preview-h2 {
-        @apply font-slab text-[28px] font-light;
+        @apply font-slab text-[28px] font-light my-[20px] dark:text-100 text-700;
     }
     .preview-h3 {
-        @apply font-slab text-[24px] font-bold;
+        @apply font-slab text-[24px] font-bold my-[20px] dark:text-100 text-700;
     }
     .preview-h4 {
-        @apply font-slab text-[20px] font-bold;
+        @apply font-slab text-[20px] font-bold my-[20px] dark:text-100 text-700;
     }
     .preview-h5 {
-        @apply font-slab text-[16px] font-bold;
+        @apply font-slab text-[16px] font-bold my-[20px] dark:text-100 text-700;
     }
     .preview-h6 {
-        @apply font-slab text-[16px] font-bold;
+        @apply font-slab text-[16px] font-bold text-orange my-[20px];
     }
     .preview-p {
-        @apply font-slab text-[14px] leading-[24px];
+        @apply font-slab text-[14px] leading-[24px] text-500 dark:text-400;
     }
     .preview-p-bold {
-        @apply font-slab text-[14px] leading-[24px];
+        @apply font-slab text-[14px] leading-[24px] text-500 dark:text-400;
     }
-    .markdown-mono {
-        @apply font-mono text-[14px] leading-[24px];
+    .preview-ul {
+        list-style: none;
+        @apply font-slab text-[14px] leading-[24px] dark:text-100 text-700;
+    }
+    .preview-a {
+        @apply font-slab text-[14px] leading-[24px] text-500 dark:text-400 underline;
+    }
+    .preview-ul li::before {
+        content: '\2022';
+        color: #e46643;
+        font-weight: bold;
+        display: inline-block;
+        width: 5px;
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+    .preview-ol li::marker,
+    .preview-ol li {
+        @apply dark:text-100 text-700 font-slab text-[14px];
+    }
+    .preview-ul li:has(input)::before {
+        content: '';
+        margin-left: -18px;
+    }
+    .preview-ul li:has(input) {
+        margin-left: -6px;
+    }
+    .preview-ul li input[type='checkbox'] {
+        margin-right: 20px;
+        background-color: purple;
+    }
+
+    .preview-blockquote {
+        @apply dark:bg-800 bg-200;
+        border-left: 5px solid #e46643;
+        border-radius: 3px 2px 2px 3px;
+        padding: 16px;
+        font-weight: 700;
+        font-style: normal;
+    }
+    .markdown-code {
+        @apply font-mono text-[14px] leading-[24px] dark:text-100 text-700;
     }
 }

@@ -1,6 +1,6 @@
 'use client'
 import { useTheme } from 'next-themes'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsMoon as MoonIcon, BsSun as SunIcon } from 'react-icons/bs'
 import { clsxm } from '../../../../utils/clsxm'
 import Switch from 'react-switch'
@@ -10,10 +10,20 @@ type ThemeSwitchProps = {
 }
 
 const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ className }) => {
+    const [mounted, setMounted] = useState(false)
+
     const { theme, setTheme } = useTheme()
+
     const toggleTheme = () => {
         if (theme === 'light') setTheme('dark')
         else setTheme('light')
+    }
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return null
     }
     return (
         <div
