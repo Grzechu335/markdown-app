@@ -11,9 +11,13 @@ import { VscChromeClose as CloseIcon } from 'react-icons/vsc'
 import { useSidebarContext } from '../../../context/SidebarContext'
 import { clsxm } from '../../../utils/clsxm'
 import CustomButton from '../atoms/CustomButton'
+import { usePathname } from 'next/navigation'
 
 const Header: React.FC = () => {
     const { toggleMenu, open } = useSidebarContext()
+    const path = usePathname()
+    if (path === '/auth/signin') return null
+
     return (
         <header className="fixed left-0 top-0 right-0 h-[56px] md:h-[72px] bg-800 flex justify-between z-[998]">
             <div

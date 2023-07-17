@@ -1,17 +1,26 @@
 'use client'
-import React, { useState } from 'react'
-import { clsxm } from '../../../utils/clsxm'
-import { useSidebarContext } from '../../../context/SidebarContext'
-import MarkdownCode from '../organisms/MarkdownCode'
-import MarkdownPreview from '../organisms/MarkdownPreview'
+import { AnimatePresence } from 'framer-motion'
+import React from 'react'
 import {
-    BsEyeFill as OpenedEyeIcon,
     BsEyeSlashFill as ClosedEyeIcon,
+    BsEyeFill as OpenedEyeIcon,
 } from 'react-icons/bs'
 import { useMarkdownContext } from '../../../context/MarkdownContext'
-import { AnimatePresence, motion as m } from 'framer-motion'
+import { useSidebarContext } from '../../../context/SidebarContext'
+import { clsxm } from '../../../utils/clsxm'
+import MarkdownCode from '../organisms/MarkdownCode'
+import MarkdownPreview from '../organisms/MarkdownPreview'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const HomePageTemplate: React.FC = () => {
+    const router = useRouter()
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated: () => {
+            router.push('/auth/signin')
+        },
+    })
     const { open } = useSidebarContext()
     const { previewMode, togglePreviewMode } = useMarkdownContext()
     return (
