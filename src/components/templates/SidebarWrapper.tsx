@@ -1,12 +1,12 @@
 'use client'
 import { AnimatePresence } from 'framer-motion'
 import React from 'react'
-import { useSidebarContext } from '../../../context/SidebarContext'
 import Sidebar from '../organisms/Sidebar'
+import { useUIContext } from '../../../context/UIContext'
 
 const SidebarWrapper: React.FC = () => {
-    const { open } = useSidebarContext()
-    return <AnimatePresence>{open && <Sidebar />}</AnimatePresence>
+    const { sidebar } = useUIContext()
+    return <AnimatePresence>{sidebar && <Sidebar />}</AnimatePresence>
 }
 
 export default SidebarWrapper

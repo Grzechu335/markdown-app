@@ -9,13 +9,13 @@ interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const CustomButton: React.FC<CustomButtonProps> = (props) => {
-    const { className, children, providerId, ...rest } = props
+    const { className, children, providerId, onClick, ...rest } = props
     return (
         <button
             onClick={
                 providerId
                     ? () => signIn(providerId, { callbackUrl: '/' })
-                    : undefined
+                    : onClick
             }
             className={clsxm(
                 'heading-md text-100 rounded-[4px] bg-orange hover:bg-orangeHover cursor-pointer py-[10px] px-4 flex items-center justify-center space-x-[8px]',

@@ -2,13 +2,34 @@
 import CustomButton from '@/components/atoms/CustomButton'
 import ThemeSwitch from '@/components/atoms/ThemeSwitch'
 import { motion as m } from 'framer-motion'
-import Documents from '../Documents'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { GoSignOut as SignOutIcon } from 'react-icons/go'
-import { signOut } from 'next-auth/react'
+import Documents from '../Documents'
+import { useMarkdownContext } from '../../../../context/MarkdownContext'
+import { MarkDownFile } from '@prisma/client'
+import { useUIContext } from '../../../../context/UIContext'
 
 const Sidebar: React.FC = () => {
     const { data: session } = useSession()
+    const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
+        useMarkdownContext()
+    const { toggleSidebar } = useUIContext()
+    const createNewDocument = async () => {
+        try {
+            const newMarkdown: MarkDownFile = await fetch(
+                '/api/markdown/createNewFile',
+                {
+                    method: 'POST',
+                }
+            ).then((res) => res.json())
+            setInputToValue(newMarkdown.text)
+            setFileNameToValue(newMarkdown.name)
+            changeSelectedFileId(newMarkdown.id)
+            toggleSidebar()
+        } catch (err) {
+            console.error(err)
+        }
+    }
     return (
         <m.aside
             initial={{
@@ -31,7 +52,7 @@ const Sidebar: React.FC = () => {
                         <span className="text-100">{session?.user?.name}</span>{' '}
                         <br /> documents
                     </h2>
-                    <CustomButton>
+                    <CustomButton onClick={createNewDocument}>
                         <span>+ New Document</span>
                     </CustomButton>
                     <Documents />

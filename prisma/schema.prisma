@@ -8,8 +8,9 @@ datasource db {
 }
 
 model MarkDownFile {
-  id String @id @default(cuid())
-  createdAt DateTime
+  id String @id @unique @default(cuid())
+  name String 
+  lastUpdate DateTime @default(now())
   text String
   author User @relation(fields: [authorId], references: [id])
   authorId String

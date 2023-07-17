@@ -1,6 +1,7 @@
 'use client'
 import { AnimatePresence, motion as m } from 'framer-motion'
 import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 import logoImage from 'public/assets/logo.svg'
 import React from 'react'
 import { BiTrash as TrashIcon } from 'react-icons/bi'
@@ -8,31 +9,53 @@ import { GoFile as FileIcon } from 'react-icons/go'
 import { RxHamburgerMenu as HamburgerMenuIcon } from 'react-icons/rx'
 import { TfiSave as SaveIcon } from 'react-icons/tfi'
 import { VscChromeClose as CloseIcon } from 'react-icons/vsc'
-import { useSidebarContext } from '../../../context/SidebarContext'
+import Skeleton from 'react-loading-skeleton'
+import useGetFileById from '../../../hooks/useGetFileById'
 import { clsxm } from '../../../utils/clsxm'
 import CustomButton from '../atoms/CustomButton'
-import { usePathname } from 'next/navigation'
+import { useMarkdownContext } from '../../../context/MarkdownContext'
+import { useUIContext } from '../../../context/UIContext'
 
 const Header: React.FC = () => {
-    const { toggleMenu, open } = useSidebarContext()
     const path = usePathname()
+    const { file, loading } = useGetFileById()
+    const { input, fileName, changeFileName } = useMarkdownContext()
+    const { toggleDeleteModal, sidebar, toggleSidebar } = useUIContext()
+    const saveFile = async () => {
+        const updatedFile = {
+            id: file?.id,
+            name: fileName,
+            text: input,
+        }
+        try {
+            await fetch('/api/markdown/saveFile', {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedFile),
+                method: 'POST',
+            })
+            // router.refresh()
+        } catch (err) {
+            console.error(err)
+        }
+    }
     if (path === '/auth/signin') return null
-
     return (
         <header className="fixed left-0 top-0 right-0 h-[56px] md:h-[72px] bg-800 flex justify-between z-[998]">
             <div
                 className={clsxm(
                     'flex space-x-3 md:space-x-6 transition-all duration-200',
                     {
-                        'ml-[250px]': open,
+                        'ml-[250px]': sidebar,
                     }
                 )}
             >
                 <div
-                    onClick={toggleMenu}
+                    onClick={toggleSidebar}
                     className="grid place-content-center w-[56px] h-[56px] md:w-[72px] md:h-[72px] bg-700 cursor-pointer hover:bg-orange transition-colors duration-200"
                 >
-                    {!open ? (
+                    {!sidebar ? (
                         <HamburgerMenuIcon
                             size={30}
                             color="#fff"
@@ -58,14 +81,23 @@ const Header: React.FC = () => {
                     />
                     <div>
                         <p className="hidden text-500 body-md md:inline">
-                            Document Name
+                            Document name
                         </p>
-                        <p className="text-100 heading-md">welcome.md</p>
+                        {loading ? (
+                            <Skeleton className="inline-block" />
+                        ) : (
+                            <input
+                                value={fileName}
+                                onChange={(e) => changeFileName(e)}
+                                className="block"
+                                type="text"
+                            />
+                        )}
                     </div>
                 </div>
             </div>
             <AnimatePresence initial={false}>
-                {!open && (
+                {!sidebar && (
                     <m.div
                         initial={{
                             x: 300,
@@ -88,8 +120,12 @@ const Header: React.FC = () => {
                             size={20}
                             color="#7C8187"
                             className="cursor-pointer"
+                            onClick={toggleDeleteModal}
                         />
-                        <CustomButton className="p-3">
+                        <CustomButton
+                            onClick={saveFile}
+                            className="p-3"
+                        >
                             <SaveIcon
                                 color="#fff"
                                 size={16}

@@ -1,9 +1,11 @@
 import Header from '@/components/templates/Header'
-import SidebarWrapper from '@/components/templates/SidebarWrapper'
 import type { Metadata } from 'next'
 import { Roboto, Roboto_Mono, Roboto_Slab } from 'next/font/google'
 import Providers from '../../providers/Providers'
 import './globals.css'
+import 'react-loading-skeleton/dist/skeleton.css'
+import SidebarServer from '@/components/templates/SidebarServer'
+import DeleteModal from '@/components/modals/DeleteModal'
 
 const robotoRegular = Roboto({
     subsets: ['latin'],
@@ -45,7 +47,8 @@ export default function RootLayout({
             >
                 <Providers>
                     <Header />
-                    <SidebarWrapper />
+                    <SidebarServer />
+                    <DeleteModal />
                     <div className="mt-[56px] md:mt-[72px]">{children}</div>
                 </Providers>
             </body>
