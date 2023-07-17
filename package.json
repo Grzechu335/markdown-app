@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next-auth/prisma-adapter": "^0.4.4-canary.81",
+    "@prisma/client": "^5.0.0",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -35,6 +37,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "prisma": "^5.0.0",
     "react-syntax-highlighter": "^15.5.0"
   }
 }
