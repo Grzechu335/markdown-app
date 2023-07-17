@@ -1,8 +1,7 @@
-import React from 'react'
-import { getProviders, signIn } from 'next-auth/react'
-import logoImage from 'public/assets/logo.svg'
-import Image from 'next/image'
 import CustomButton from '@/components/atoms/CustomButton'
+import { getProviders } from 'next-auth/react'
+import Image from 'next/image'
+import logoImage from 'public/assets/logo.svg'
 
 const SignIn = async () => {
     const providers = await getProviders()
