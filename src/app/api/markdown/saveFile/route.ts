@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions)
     if (session) {
         try {
-            await prisma.markDownFile.update({
+            await prisma.markdownFile.update({
                 where: {
                     id: updatedFile.id,
                 },

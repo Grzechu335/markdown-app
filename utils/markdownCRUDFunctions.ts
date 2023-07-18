@@ -1,4 +1,4 @@
-import { MarkDownFile } from '@prisma/client'
+import { MarkdownFile } from '@prisma/client'
 
 export const updateMarkdownFile = async ({
     id,
@@ -43,7 +43,7 @@ export const deleteMarkdownFile = async ({
             },
         })
         // fetch latest file
-        const latestFile: MarkDownFile = await fetch(
+        const latestFile: MarkdownFile = await fetch(
             'api/markdown/latestFile',
             {
                 method: 'GET',
@@ -61,7 +61,7 @@ export const deleteMarkdownFile = async ({
 
 export const createNewMarkdownFile = async () => {
     try {
-        const newMarkdown: MarkDownFile = await fetch(
+        const newMarkdown: MarkdownFile = await fetch(
             '/api/markdown/createNewFile',
             {
                 method: 'POST',

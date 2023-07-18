@@ -1,11 +1,11 @@
 'use client'
-import { MarkDownFile } from '@prisma/client'
+import { MarkdownFile } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 import { useCallback, useEffect, useState } from 'react'
 import { useMarkdownContext } from '../context/MarkdownContext'
 
 const useGetFileById = () => {
-    const [file, setFile] = useState<MarkDownFile | null>(null)
+    const [file, setFile] = useState<MarkdownFile | null>(null)
     const [loading, setLoading] = useState(false)
     const { selectedFileId, setInputToValue, setFileNameToValue } =
         useMarkdownContext()
@@ -14,7 +14,7 @@ const useGetFileById = () => {
     const refreshFile = useCallback(async () => {
         setLoading(true)
         try {
-            const res: MarkDownFile = await fetch('/api/markdown/getFile', {
+            const res: MarkdownFile = await fetch('/api/markdown/getFile', {
                 body: JSON.stringify({ fileId: selectedFileId }),
                 method: 'POST',
             }).then((res) => res.json())

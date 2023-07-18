@@ -7,7 +7,7 @@ export async function GET() {
     const session = await getServerSession(authOptions)
     if (session) {
         try {
-            const latestFile = await prisma.markDownFile.findFirst({
+            const latestFile = await prisma.markdownFile.findFirst({
                 where: {
                     authorId: session.user.id,
                 },

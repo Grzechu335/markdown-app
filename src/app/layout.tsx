@@ -51,7 +51,21 @@ export default function RootLayout({
                     <SidebarServer />
                     <DeleteModal />
                     <div className="mt-[56px] md:mt-[72px]">{children}</div>
-                    <Toaster />
+                    <Toaster
+                        toastOptions={{
+                            loading: {
+                                iconTheme: {
+                                    primary: '#C1C4CB',
+                                    secondary: '#fff',
+                                },
+                            },
+                            style: {
+                                fontFamily: 'var(--font-robotoMono)',
+                                backgroundColor: '#E46643',
+                                color: '#fff',
+                            },
+                        }}
+                    />
                 </Providers>
             </body>
         </html>

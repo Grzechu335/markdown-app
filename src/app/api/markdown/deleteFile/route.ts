@@ -5,7 +5,7 @@ export async function DELETE(req: Request) {
     const { selectedFileId } = (await req.json()) as { selectedFileId: string }
     try {
         console.log(selectedFileId)
-        await prisma.markDownFile.delete({
+        await prisma.markdownFile.delete({
             where: {
                 id: selectedFileId,
             },

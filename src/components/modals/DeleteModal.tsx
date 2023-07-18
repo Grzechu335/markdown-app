@@ -4,7 +4,6 @@ import { AnimatePresence, motion as m } from 'framer-motion'
 import { useMarkdownContext } from '../../../context/MarkdownContext'
 import CustomButton from '../atoms/CustomButton'
 import { useUIContext } from '../../../context/UIContext'
-import { MarkDownFile } from '@prisma/client'
 import { toast } from 'react-hot-toast'
 import { deleteMarkdownFile } from '../../../utils/markdownCRUDFunctions'
 

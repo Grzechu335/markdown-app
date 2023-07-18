@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions)
     if (session) {
         try {
-            const res = await prisma.markDownFile.create({
+            const res = await prisma.markdownFile.create({
                 data: {
                     name: 'newDocument',
                     text: '# Start typing to magic happen!',

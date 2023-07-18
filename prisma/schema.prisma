@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model MarkDownFile {
+model MarkdownFile {
   id String @id @unique @default(cuid())
   name String 
   lastUpdate DateTime @default(now())
@@ -51,7 +51,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  markdownFiles MarkDownFile[]
+  markdownFiles MarkdownFile[]
 }
 
 model VerificationToken {

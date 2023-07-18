@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions)
     try {
         if (fileId !== null) {
-            const file = await prisma.markDownFile.findUnique({
+            const file = await prisma.markdownFile.findUnique({
                 where: {
                     id: fileId,
                     authorId: session?.user.id,
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
             })
             return NextResponse.json(file)
         } else {
-            const file = await prisma.markDownFile.findFirst({
+            const file = await prisma.markdownFile.findFirst({
                 where: {
                     authorId: session?.user.id,
                 },

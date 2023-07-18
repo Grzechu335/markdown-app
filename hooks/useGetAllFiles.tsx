@@ -1,9 +1,9 @@
 'use client'
-import { MarkDownFile } from '@prisma/client'
+import { MarkdownFile } from '@prisma/client'
 import { useCallback, useEffect, useState } from 'react'
 
 const useGetAllFiles = () => {
-    const [files, setFiles] = useState<MarkDownFile[] | null>(null)
+    const [files, setFiles] = useState<MarkdownFile[] | null>(null)
     const [loading, setLoading] = useState(false)
 
     const getFiles = useCallback(async () => {

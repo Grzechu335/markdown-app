@@ -6,7 +6,7 @@ import { authOptions } from '../../../../../lib/auth'
 export async function GET() {
     const session = await getServerSession(authOptions)
     try {
-        const file = await prisma.markDownFile.findMany({
+        const file = await prisma.markdownFile.findMany({
             where: {
                 authorId: session?.user.id,
             },
