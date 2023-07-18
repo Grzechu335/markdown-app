@@ -3,7 +3,6 @@ import { prisma } from '../../../../../lib/prisma'
 
 export async function DELETE(req: Request) {
     const { selectedFileId } = (await req.json()) as { selectedFileId: string }
-    if (selectedFileId === null) console.log('no file to delete')
     try {
         const res = await prisma.markdownFile.delete({
             where: {

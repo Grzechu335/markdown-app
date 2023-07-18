@@ -1,8 +1,10 @@
 const dateFormatter = (date: Date) => {
     return date.toLocaleString('en-GB', {
         day: 'numeric',
-        month: 'short',
+        month: 'numeric',
         year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
     })
 }
 

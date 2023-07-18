@@ -26,7 +26,6 @@ const Header: React.FC = () => {
         useMarkdownContext()
     const { toggleDeleteModal, sidebar, toggleSidebar } = useUIContext()
     const { files } = useGetAllFiles()
-    console.log(files)
     const updateFile = () => {
         toast.promise(
             updateMarkdownFile({
@@ -90,7 +89,7 @@ const Header: React.FC = () => {
                         </p>
                         {loading ? (
                             <Skeleton className="inline-block" />
-                        ) : (
+                        ) : files?.length !== 0 ? (
                             <input
                                 disabled={files?.length === 0}
                                 value={fileName}
@@ -98,6 +97,10 @@ const Header: React.FC = () => {
                                 className="block outline-none disabled:cursor-not-allowed bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-100 cursor-pointer hover:text-orangeHover"
                                 type="text"
                             />
+                        ) : (
+                            <p className="text-red-500 heading-md">
+                                No files found
+                            </p>
                         )}
                     </div>
                 </div>
@@ -123,18 +126,13 @@ const Header: React.FC = () => {
                         className="flex items-center mr-2 space-x-4 md:space-x-6 md:mr-4"
                     >
                         <button
-                            disabled={
-                                // selectedFileId === null ||
-                                // selectedFileId === '' ||
-                                files?.length === 0
-                            }
+                            disabled={files?.length === 0}
                             onClick={toggleDeleteModal}
                             className="group disabled:cursor-not-allowed"
                         >
                             <TrashIcon
                                 size={20}
-                                // color="#7C8187"
-                                className="fill-500 group-hover:fill-orange"
+                                className="fill-500 group-hover:fill-orange group-disabled:fill-red-500"
                             />
                         </button>
                         <CustomButton

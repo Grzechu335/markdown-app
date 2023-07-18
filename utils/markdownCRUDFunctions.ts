@@ -67,10 +67,6 @@ export const createNewMarkdownFile = async () => {
                 method: 'POST',
             }
         ).then((res) => res.json())
-        // setInputToValue(newMarkdown.text)
-        // setFileNameToValue(newMarkdown.name)
-        // changeSelectedFileId(newMarkdown.id)
-        // toggleSidebar()
         return {
             ...newMarkdown,
             ok: true,

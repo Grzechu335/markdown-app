@@ -13,7 +13,7 @@ type UIContextType = {
 }
 
 const UIContext = createContext<UIContextType>({
-    preview: true,
+    preview: false,
     togglePreview: () => {},
     setPreviewToValue: () => {},
     deleteModal: false,
@@ -26,7 +26,7 @@ const UIContext = createContext<UIContextType>({
 export const UIContextProvider: React.FC<{
     children: React.ReactNode
 }> = ({ children }) => {
-    const [preview, setPreview] = useState(true)
+    const [preview, setPreview] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
     const [sidebar, setSidebar] = useState(false)
 

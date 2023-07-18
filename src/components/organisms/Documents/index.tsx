@@ -10,11 +10,10 @@ import Skeleton from 'react-loading-skeleton'
 const Documents: React.FC = () => {
     const { changeSelectedFileId, selectedFileId } = useMarkdownContext()
     const { files: markdowns, loading } = useGetAllFiles()
-    console.log(markdowns)
     return (
         <>
             {!loading ? (
-                <div className="space-y-[26px] h-full flex-grow overflow-y-scroll scrollbar-none overflow-x-hidden">
+                <div className="space-y-[26px] h-full flex flex-col flex-grow overflow-y-scroll scrollbar-none overflow-x-hidden">
                     {markdowns &&
                         markdowns.length > 0 &&
                         markdowns?.map((file) => (
@@ -49,12 +48,14 @@ const Documents: React.FC = () => {
                         ))}
                 </div>
             ) : (
-                Array.from({ length: 10 }).map((_, idx) => (
-                    <Skeleton
-                        key={idx}
-                        className="w-full h-10"
-                    />
-                ))
+                <div className="space-y-[26px] flex flex-col h-full flex-grow overflow-y-scroll scrollbar-none overflow-x-hidden">
+                    {Array.from({ length: 10 }).map((_, idx) => (
+                        <Skeleton
+                            key={idx}
+                            className="w-full h-8"
+                        />
+                    ))}
+                </div>
             )}
         </>
     )

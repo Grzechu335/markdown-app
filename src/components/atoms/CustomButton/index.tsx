@@ -18,7 +18,7 @@ const CustomButton: React.FC<CustomButtonProps> = (props) => {
                     : onClick
             }
             className={clsxm(
-                'heading-md text-100 rounded-[4px] bg-orange hover:bg-orangeHover cursor-pointer py-[10px] px-4 flex items-center justify-center space-x-[8px]',
+                'heading-md text-100 rounded-[4px] bg-orange disabled:bg-red-500 hover:bg-orangeHover cursor-pointer py-[10px] px-4 flex items-center justify-center space-x-[8px]',
                 `${className}`
             )}
             {...rest}

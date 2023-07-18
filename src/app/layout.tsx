@@ -4,9 +4,9 @@ import { Roboto, Roboto_Mono, Roboto_Slab } from 'next/font/google'
 import Providers from '../../providers/Providers'
 import './globals.css'
 import 'react-loading-skeleton/dist/skeleton.css'
-import SidebarServer from '@/components/templates/SidebarServer'
 import DeleteModal from '@/components/modals/DeleteModal'
 import { Toaster } from 'react-hot-toast'
+import SidebarWrapper from '@/components/templates/SidebarWrapper'
 
 const robotoRegular = Roboto({
     subsets: ['latin'],
@@ -50,7 +50,7 @@ export default function RootLayout({
             >
                 <Providers>
                     <Header />
-                    <SidebarServer />
+                    <SidebarWrapper />
                     <DeleteModal />
                     <div className="mt-[56px] md:mt-[72px]">{children}</div>
                     <Toaster
