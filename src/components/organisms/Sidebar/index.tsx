@@ -9,13 +9,13 @@ import { useMarkdownContext } from '../../../../context/MarkdownContext'
 import { useUIContext } from '../../../../context/UIContext'
 import { createNewMarkdownFile } from '../../../../utils/markdownCRUDFunctions'
 import Documents from '../Documents'
-import useGetAllFiles from '../../../../hooks/useGetAllFiles'
 
 const Sidebar: React.FC = () => {
     const { data: session } = useSession()
 
     const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
         useMarkdownContext()
+
     const { toggleSidebar } = useUIContext()
     const createNewFile = async () => {
         toast.promise(createNewMarkdownFile(), {

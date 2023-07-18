@@ -30,7 +30,7 @@ const DeleteModal: React.FC = () => {
             {deleteModal && (
                 <m.div
                     onClick={toggleDeleteModal}
-                    className="fixed left-0 top-0 w-screen h-screen z-[100000] bg-1000/50 flex justify-center items-center"
+                    className="fixed left-0 top-0 w-screen h-screen z-[1000] bg-1000/50 flex justify-center items-center"
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}

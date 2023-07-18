@@ -8,7 +8,7 @@ const SignIn = async () => {
     if (!providers) return null
     return (
         <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-700">
-            <div className="flex flex-col items-center space-y-12">
+            <div className="flex flex-col items-center p-4 space-y-12">
                 <Image
                     src={logoImage}
                     alt="logo image"

@@ -65,6 +65,7 @@ export default function RootLayout({
                                 fontFamily: 'var(--font-robotoMono)',
                                 backgroundColor: '#E46643',
                                 color: '#fff',
+                                zIndex: 10000000,
                             },
                         }}
                     />
