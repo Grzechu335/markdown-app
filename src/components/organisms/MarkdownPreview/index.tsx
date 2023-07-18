@@ -24,7 +24,7 @@ const MarkdownPreview: React.FC = () => {
             transition={{
                 duration: 0.1,
             }}
-            className="flex-col  md:flex flex-1 w-full h-full max-h-full overflow-y-scroll scrollbar-none md:border-l-[1px] md:border-300 md:dark:border-600 z-10"
+            className="absolute flex-col md:static md:flex flex-1 w-full h-full max-h-full overflow-y-scroll scrollbar-none md:border-l-[1px] md:border-300 md:dark:border-600 z-10"
         >
             <MarkdownHeading>Preview</MarkdownHeading>
             <MarkdownParser>{input}</MarkdownParser>

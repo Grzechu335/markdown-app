@@ -26,7 +26,7 @@ const HomePageTemplate: React.FC = () => {
     return (
         <div
             className={clsxm(
-                'transition-transform transform overflow-x-hidden h-[calc(100vh-56px)] md:h-[calc(100vh-72px)] md:max-h-[calc(100vh-72px)] max-h-[calc(100vh-56px)]  relative left-0 duration-200 bg-100 dark:bg-1000',
+                'transition-transform transform overflow-hidden overflow-x-hidden h-[calc(100vh-56px)] md:h-[calc(100vh-72px)] md:max-h-[calc(100vh-72px)] max-h-[calc(100vh-56px)]  relative left-0 duration-200 bg-100 dark:bg-1000',
                 {
                     'translate-x-[250px]': sidebar,
                 }
@@ -48,7 +48,6 @@ const HomePageTemplate: React.FC = () => {
                         />
                     )
                 ) : null}
-
                 {files?.length !== 0 ? (
                     <React.Fragment>
                         <MarkdownCode />

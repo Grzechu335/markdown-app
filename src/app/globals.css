@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply overflow-x-hidden bg-100 dark:bg-1000;
+        @apply overflow-hidden bg-100 dark:bg-1000;
     }
 }
 
