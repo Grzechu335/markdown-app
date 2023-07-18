@@ -17,7 +17,7 @@ const MarkdownParser: React.FC<MarkdownParserProps> = ({
     return (
         <ReactMarkdown
             className={clsxm(
-                'px-4 py-2 prose h-full min-w-full flex-grow bg-100 dark:bg-1000 ',
+                'px-4 py-2 prose h-full min-w-full flex-grow bg-100 dark:bg-1000 overflow-y-scroll ',
                 `${className ? className : ''}`
             )}
             components={{

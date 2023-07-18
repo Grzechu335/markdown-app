@@ -49,7 +49,7 @@ const Documents: React.FC = () => {
                 </div>
             ) : (
                 <div className="space-y-[26px] flex flex-col h-full flex-grow overflow-y-scroll scrollbar-none overflow-x-hidden">
-                    {Array.from({ length: 10 }).map((_, idx) => (
+                    {Array.from({ length: 6 }).map((_, idx) => (
                         <Skeleton
                             key={idx}
                             className="w-full h-8"
