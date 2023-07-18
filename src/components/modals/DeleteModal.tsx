@@ -5,33 +5,25 @@ import { useMarkdownContext } from '../../../context/MarkdownContext'
 import CustomButton from '../atoms/CustomButton'
 import { useUIContext } from '../../../context/UIContext'
 import { MarkDownFile } from '@prisma/client'
+import { toast } from 'react-hot-toast'
+import { deleteMarkdownFile } from '../../../utils/markdownCRUDFunctions'
 
 const DeleteModal: React.FC = () => {
     const { fileName, selectedFileId, changeSelectedFileId } =
         useMarkdownContext()
     const { deleteModal, toggleDeleteModal } = useUIContext()
-    const deleteMarkdown = async () => {
-        try {
-            // delete file
-            await fetch('/api/markdown/deleteFile', {
-                method: 'DELETE',
-                body: JSON.stringify({ selectedFileId }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            toggleDeleteModal()
-            // fetch latest file
-            const latestFile: MarkDownFile = await fetch(
-                'api/markdown/latestFile',
-                {
-                    method: 'GET',
-                }
-            ).then((res) => res.json())
-            changeSelectedFileId(latestFile.id)
-        } catch (err) {
-            console.error(err)
-        }
+    const deleteFile = async () => {
+        toast.promise(deleteMarkdownFile({ selectedFileId }), {
+            success: (res) => {
+                if (!res.ok) throw new Error()
+                toggleDeleteModal()
+                // @ts-ignore
+                changeSelectedFileId(res.id)
+                return 'File was deleted'
+            },
+            loading: 'Deleting file...',
+            error: 'Something went wrong while deleting file',
+        })
     }
     return (
         <AnimatePresence>
@@ -49,7 +41,7 @@ const DeleteModal: React.FC = () => {
                             document and its contents? This action cannot be
                             reversed.
                         </p>
-                        <CustomButton onClick={deleteMarkdown}>
+                        <CustomButton onClick={deleteFile}>
                             Confirm & Delete
                         </CustomButton>
                     </div>

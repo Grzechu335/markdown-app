@@ -1,7 +1,7 @@
 'use client'
 import { AnimatePresence, motion as m } from 'framer-motion'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import logoImage from 'public/assets/logo.svg'
 import React from 'react'
 import { BiTrash as TrashIcon } from 'react-icons/bi'
@@ -10,36 +10,38 @@ import { RxHamburgerMenu as HamburgerMenuIcon } from 'react-icons/rx'
 import { TfiSave as SaveIcon } from 'react-icons/tfi'
 import { VscChromeClose as CloseIcon } from 'react-icons/vsc'
 import Skeleton from 'react-loading-skeleton'
-import useGetFileById from '../../../hooks/useGetFileById'
-import { clsxm } from '../../../utils/clsxm'
-import CustomButton from '../atoms/CustomButton'
 import { useMarkdownContext } from '../../../context/MarkdownContext'
 import { useUIContext } from '../../../context/UIContext'
+import useGetFileById from '../../../hooks/useGetFileById'
+import { clsxm } from '../../../utils/clsxm'
+import { updateMarkdownFile } from '../../../utils/markdownCRUDFunctions'
+import CustomButton from '../atoms/CustomButton'
+import { toast } from 'react-hot-toast'
 
 const Header: React.FC = () => {
     const path = usePathname()
     const { file, loading } = useGetFileById()
     const { input, fileName, changeFileName } = useMarkdownContext()
     const { toggleDeleteModal, sidebar, toggleSidebar } = useUIContext()
-    const saveFile = async () => {
-        const updatedFile = {
-            id: file?.id,
-            name: fileName,
-            text: input,
-        }
-        try {
-            await fetch('/api/markdown/saveFile', {
-                headers: {
-                    'Content-Type': 'application/json',
+
+    const updateFile = () => {
+        toast.promise(
+            updateMarkdownFile({
+                id: file?.id,
+                name: fileName,
+                text: input,
+            }),
+            {
+                success: (res) => {
+                    if (!res?.ok) throw new Error()
+                    return 'File was updated'
                 },
-                body: JSON.stringify(updatedFile),
-                method: 'POST',
-            })
-            // router.refresh()
-        } catch (err) {
-            console.error(err)
-        }
+                loading: 'Updating file...',
+                error: 'Something went wrong while updating file',
+            }
+        )
     }
+
     if (path === '/auth/signin') return null
     return (
         <header className="fixed left-0 top-0 right-0 h-[56px] md:h-[72px] bg-800 flex justify-between z-[998]">
@@ -123,7 +125,7 @@ const Header: React.FC = () => {
                             onClick={toggleDeleteModal}
                         />
                         <CustomButton
-                            onClick={saveFile}
+                            onClick={updateFile}
                             className="p-3"
                         >
                             <SaveIcon

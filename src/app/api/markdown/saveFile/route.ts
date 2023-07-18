@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions)
     if (session) {
         try {
-            const res = await prisma.markDownFile.update({
+            await prisma.markDownFile.update({
                 where: {
                     id: updatedFile.id,
                 },
@@ -21,7 +21,9 @@ export async function POST(req: Request) {
                     ...updatedFile,
                 },
             })
-            return NextResponse.json(res)
+            return NextResponse.json('', {
+                status: 200,
+            })
         } catch (err) {
             console.error(err)
         }

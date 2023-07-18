@@ -6,6 +6,7 @@ import './globals.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 import SidebarServer from '@/components/templates/SidebarServer'
 import DeleteModal from '@/components/modals/DeleteModal'
+import { Toaster } from 'react-hot-toast'
 
 const robotoRegular = Roboto({
     subsets: ['latin'],
@@ -50,6 +51,7 @@ export default function RootLayout({
                     <SidebarServer />
                     <DeleteModal />
                     <div className="mt-[56px] md:mt-[72px]">{children}</div>
+                    <Toaster />
                 </Providers>
             </body>
         </html>

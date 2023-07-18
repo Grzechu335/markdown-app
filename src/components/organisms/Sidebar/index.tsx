@@ -8,27 +8,28 @@ import Documents from '../Documents'
 import { useMarkdownContext } from '../../../../context/MarkdownContext'
 import { MarkDownFile } from '@prisma/client'
 import { useUIContext } from '../../../../context/UIContext'
+import { toast } from 'react-hot-toast'
+import { createNewMarkdownFile } from '../../../../utils/markdownCRUDFunctions'
 
 const Sidebar: React.FC = () => {
     const { data: session } = useSession()
     const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
         useMarkdownContext()
     const { toggleSidebar } = useUIContext()
-    const createNewDocument = async () => {
-        try {
-            const newMarkdown: MarkDownFile = await fetch(
-                '/api/markdown/createNewFile',
-                {
-                    method: 'POST',
-                }
-            ).then((res) => res.json())
-            setInputToValue(newMarkdown.text)
-            setFileNameToValue(newMarkdown.name)
-            changeSelectedFileId(newMarkdown.id)
-            toggleSidebar()
-        } catch (err) {
-            console.error(err)
-        }
+    const createNewFile = async () => {
+        toast.promise(createNewMarkdownFile(), {
+            success: (res) => {
+                if (!res.ok) throw new Error()
+                // @ts-ignore
+                setInputToValue(res.text)
+                setFileNameToValue(res?.name!)
+                changeSelectedFileId(res?.id!)
+                toggleSidebar()
+                return 'File was created'
+            },
+            loading: 'Creating file...',
+            error: 'Something went wrong while creating file',
+        })
     }
     return (
         <m.aside
@@ -52,7 +53,7 @@ const Sidebar: React.FC = () => {
                         <span className="text-100">{session?.user?.name}</span>{' '}
                         <br /> documents
                     </h2>
-                    <CustomButton onClick={createNewDocument}>
+                    <CustomButton onClick={createNewFile}>
                         <span>+ New Document</span>
                     </CustomButton>
                     <Documents />
