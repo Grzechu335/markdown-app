@@ -48,6 +48,7 @@ const HomePageTemplate: React.FC = () => {
                         />
                     )
                 ) : null}
+
                 {files?.length !== 0 ? (
                     <React.Fragment>
                         <MarkdownCode />
