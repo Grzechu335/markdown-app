@@ -13,7 +13,6 @@ import useGetAllFiles from '../../../../hooks/useGetAllFiles'
 
 const Sidebar: React.FC = () => {
     const { data: session } = useSession()
-    const { refetch } = useGetAllFiles()
 
     const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
         useMarkdownContext()
