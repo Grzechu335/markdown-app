@@ -31,7 +31,7 @@ export const updateMarkdownFile = async ({
 export const deleteMarkdownFile = async ({
     selectedFileId,
 }: {
-    selectedFileId: string | null
+    selectedFileId: string | undefined
 }) => {
     try {
         // delete file

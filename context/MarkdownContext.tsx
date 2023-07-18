@@ -3,14 +3,16 @@ import React, {
     ChangeEvent,
     createContext,
     useContext,
+    useEffect,
     useMemo,
     useState,
 } from 'react'
 import useGetFileById from '../hooks/useGetFileById'
+import useGetAllFiles from '../hooks/useGetAllFiles'
 
 type MarkdownContextType = {
     input: string
-    selectedFileId: string | null
+    selectedFileId: string | undefined
     fileName: string
     changeInput: (e: ChangeEvent<HTMLTextAreaElement>) => void
     changeSelectedFileId: (id: string) => void
@@ -21,7 +23,7 @@ type MarkdownContextType = {
 
 const MarkdownContext = createContext<MarkdownContextType>({
     input: '',
-    selectedFileId: null,
+    selectedFileId: undefined,
     fileName: '',
     changeInput: () => {},
     changeSelectedFileId: () => {},
@@ -34,9 +36,16 @@ export const MarkdownContextProvider: React.FC<{
     children: React.ReactNode
 }> = ({ children }) => {
     const { file } = useGetFileById()
-    const [input, setInput] = useState<string>(file?.text!)
-    const [selectedFileId, setSelectedFileId] = useState<string | null>(null)
+    const [input, setInput] = useState<string>(file?.text || '')
+    const [selectedFileId, setSelectedFileId] = useState<string | undefined>()
     const [fileName, setFileName] = useState<string>(file?.name!)
+    const { files } = useGetAllFiles()
+
+    useEffect(() => {
+        if (selectedFileId === undefined && files && files?.length > 0) {
+            setSelectedFileId(files[0].id)
+        }
+    })
 
     const changeInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setInput(e.target.value)

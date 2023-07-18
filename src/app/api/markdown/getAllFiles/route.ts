@@ -11,7 +11,7 @@ export async function GET() {
                 authorId: session?.user.id,
             },
             orderBy: {
-                lastUpdate: 'desc',
+                updatedAt: 'desc',
             },
         })
         return NextResponse.json(file)

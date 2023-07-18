@@ -21,7 +21,7 @@ export async function POST(req: Request) {
                     authorId: session?.user.id,
                 },
                 orderBy: {
-                    lastUpdate: 'desc',
+                    updatedAt: 'desc',
                 },
             })
             return NextResponse.json(file)

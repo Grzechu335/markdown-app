@@ -1,11 +1,12 @@
 'use client'
 import { MarkdownFile } from '@prisma/client'
 import { useCallback, useEffect, useState } from 'react'
+import { useMarkdownContext } from '../context/MarkdownContext'
 
 const useGetAllFiles = () => {
     const [files, setFiles] = useState<MarkdownFile[] | null>(null)
     const [loading, setLoading] = useState(false)
-
+    const { selectedFileId } = useMarkdownContext()
     const getFiles = useCallback(async () => {
         setLoading(true)
         try {
@@ -20,10 +21,13 @@ const useGetAllFiles = () => {
             setLoading(false)
         }
     }, [])
+    const refetch = () => {
+        getFiles()
+    }
     useEffect(() => {
         getFiles()
-    }, [getFiles])
-    return { files, loading }
+    }, [getFiles, selectedFileId])
+    return { files, loading, refetch }
 }
 
 export default useGetAllFiles

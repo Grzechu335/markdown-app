@@ -1,14 +1,14 @@
 'use client'
-import React from 'react'
 import { AnimatePresence, motion as m } from 'framer-motion'
-import { useMarkdownContext } from '../../../context/MarkdownContext'
-import CustomButton from '../atoms/CustomButton'
-import { useUIContext } from '../../../context/UIContext'
+import React from 'react'
 import { toast } from 'react-hot-toast'
+import { useMarkdownContext } from '../../../context/MarkdownContext'
+import { useUIContext } from '../../../context/UIContext'
 import { deleteMarkdownFile } from '../../../utils/markdownCRUDFunctions'
+import CustomButton from '../atoms/CustomButton'
 
 const DeleteModal: React.FC = () => {
-    const { fileName, selectedFileId, changeSelectedFileId } =
+    const { fileName, selectedFileId, changeSelectedFileId, setInputToValue } =
         useMarkdownContext()
     const { deleteModal, toggleDeleteModal } = useUIContext()
     const deleteFile = async () => {
@@ -16,6 +16,7 @@ const DeleteModal: React.FC = () => {
             success: (res) => {
                 if (!res.ok) throw new Error()
                 toggleDeleteModal()
+                setInputToValue('')
                 // @ts-ignore
                 changeSelectedFileId(res.id)
                 return 'File was deleted'
@@ -27,8 +28,14 @@ const DeleteModal: React.FC = () => {
     return (
         <AnimatePresence>
             {deleteModal && (
-                <m.div className="fixed left-0 top-0 w-screen h-screen z-[100000] bg-1000/50 flex justify-center items-center">
-                    <div className="flex flex-col p-6 space-y-4 bg-100 dark:bg-900 max-w-[343px] text-center">
+                <m.div
+                    onClick={toggleDeleteModal}
+                    className="fixed left-0 top-0 w-screen h-screen z-[100000] bg-1000/50 flex justify-center items-center"
+                >
+                    <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex flex-col p-6 space-y-4 bg-100 dark:bg-900 max-w-[343px] text-center"
+                    >
                         <h4 className="font-slab text-[20px] font-bold dark:text-100 text-700">
                             Delete this document?
                         </h4>

@@ -3,15 +3,18 @@ import CustomButton from '@/components/atoms/CustomButton'
 import ThemeSwitch from '@/components/atoms/ThemeSwitch'
 import { motion as m } from 'framer-motion'
 import { signOut, useSession } from 'next-auth/react'
+import { toast } from 'react-hot-toast'
 import { GoSignOut as SignOutIcon } from 'react-icons/go'
-import Documents from '../Documents'
 import { useMarkdownContext } from '../../../../context/MarkdownContext'
 import { useUIContext } from '../../../../context/UIContext'
-import { toast } from 'react-hot-toast'
 import { createNewMarkdownFile } from '../../../../utils/markdownCRUDFunctions'
+import Documents from '../Documents'
+import useGetAllFiles from '../../../../hooks/useGetAllFiles'
 
 const Sidebar: React.FC = () => {
     const { data: session } = useSession()
+    const { refetch } = useGetAllFiles()
+
     const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
         useMarkdownContext()
     const { toggleSidebar } = useUIContext()
@@ -21,7 +24,9 @@ const Sidebar: React.FC = () => {
                 if (!res.ok) throw new Error()
                 // @ts-ignore
                 setInputToValue(res.text)
+                // @ts-ignore
                 setFileNameToValue(res?.name!)
+                // @ts-ignore
                 changeSelectedFileId(res?.id!)
                 toggleSidebar()
                 return 'File was created'

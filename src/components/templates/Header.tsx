@@ -17,13 +17,16 @@ import { clsxm } from '../../../utils/clsxm'
 import { updateMarkdownFile } from '../../../utils/markdownCRUDFunctions'
 import CustomButton from '../atoms/CustomButton'
 import { toast } from 'react-hot-toast'
+import useGetAllFiles from '../../../hooks/useGetAllFiles'
 
 const Header: React.FC = () => {
     const path = usePathname()
     const { file, loading } = useGetFileById()
-    const { input, fileName, changeFileName } = useMarkdownContext()
+    const { input, fileName, changeFileName, selectedFileId } =
+        useMarkdownContext()
     const { toggleDeleteModal, sidebar, toggleSidebar } = useUIContext()
-
+    const { files } = useGetAllFiles()
+    console.log(files)
     const updateFile = () => {
         toast.promise(
             updateMarkdownFile({
@@ -89,9 +92,10 @@ const Header: React.FC = () => {
                             <Skeleton className="inline-block" />
                         ) : (
                             <input
+                                disabled={files?.length === 0}
                                 value={fileName}
                                 onChange={(e) => changeFileName(e)}
-                                className="block outline-none bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-100 cursor-pointer hover:text-orangeHover"
+                                className="block outline-none disabled:cursor-not-allowed bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-100 cursor-pointer hover:text-orangeHover"
                                 type="text"
                             />
                         )}
@@ -118,15 +122,25 @@ const Header: React.FC = () => {
                         }}
                         className="flex items-center mr-2 space-x-4 md:space-x-6 md:mr-4"
                     >
-                        <TrashIcon
-                            size={20}
-                            // color="#7C8187"
-                            className="cursor-pointer fill-500 hover:fill-orange"
+                        <button
+                            disabled={
+                                // selectedFileId === null ||
+                                // selectedFileId === '' ||
+                                files?.length === 0
+                            }
                             onClick={toggleDeleteModal}
-                        />
+                            className="group disabled:cursor-not-allowed"
+                        >
+                            <TrashIcon
+                                size={20}
+                                // color="#7C8187"
+                                className="fill-500 group-hover:fill-orange"
+                            />
+                        </button>
                         <CustomButton
                             onClick={updateFile}
-                            className="p-3"
+                            className="p-3 disabled:cursor-not-allowed"
+                            disabled={files?.length === 0}
                         >
                             <SaveIcon
                                 color="#fff"
