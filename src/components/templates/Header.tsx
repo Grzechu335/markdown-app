@@ -89,7 +89,7 @@ const Header: React.FC = () => {
                             <input
                                 value={fileName}
                                 onChange={(e) => changeFileName(e)}
-                                className="block"
+                                className="block outline-none bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-100 cursor-pointer hover:text-orangeHover"
                                 type="text"
                             />
                         )}
@@ -118,8 +118,8 @@ const Header: React.FC = () => {
                     >
                         <TrashIcon
                             size={20}
-                            color="#7C8187"
-                            className="cursor-pointer"
+                            // color="#7C8187"
+                            className="cursor-pointer fill-500 hover:fill-orange"
                             onClick={toggleDeleteModal}
                         />
                         <CustomButton

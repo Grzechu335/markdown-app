@@ -4,12 +4,15 @@ import { AnimatePresence, motion as m } from 'framer-motion'
 import { useMarkdownContext } from '../../../context/MarkdownContext'
 import CustomButton from '../atoms/CustomButton'
 import { useUIContext } from '../../../context/UIContext'
+import { MarkDownFile } from '@prisma/client'
 
 const DeleteModal: React.FC = () => {
-    const { fileName, selectedFileId } = useMarkdownContext()
+    const { fileName, selectedFileId, changeSelectedFileId } =
+        useMarkdownContext()
     const { deleteModal, toggleDeleteModal } = useUIContext()
     const deleteMarkdown = async () => {
         try {
+            // delete file
             await fetch('/api/markdown/deleteFile', {
                 method: 'DELETE',
                 body: JSON.stringify({ selectedFileId }),
@@ -18,6 +21,14 @@ const DeleteModal: React.FC = () => {
                 },
             })
             toggleDeleteModal()
+            // fetch latest file
+            const latestFile: MarkDownFile = await fetch(
+                'api/markdown/latestFile',
+                {
+                    method: 'GET',
+                }
+            ).then((res) => res.json())
+            changeSelectedFileId(latestFile.id)
         } catch (err) {
             console.error(err)
         }
