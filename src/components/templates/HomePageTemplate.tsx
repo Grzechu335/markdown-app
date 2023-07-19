@@ -58,7 +58,7 @@ const HomePageTemplate: React.FC = () => {
                         </AnimatePresence>
                     </React.Fragment>
                 ) : (
-                    <div className="fixed top-0 bottom-0 left-0 grid w-screen place-content-center">
+                    <div className="fixed top-0 left-0 grid w-screen h-full place-content-center">
                         <div className="flex flex-col items- w-[300px] text-center font-mono">
                             <p>There is no markdown files on your account.</p>
                             <br />
