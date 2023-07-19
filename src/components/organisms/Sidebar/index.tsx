@@ -59,7 +59,7 @@ const Sidebar: React.FC = () => {
                     <CustomButton onClick={createNewFile}>
                         <span>+ New Document</span>
                     </CustomButton>
-                    {/* <Documents /> */}
+                    <Documents />
                 </div>
                 <div className="flex items-center justify-between">
                     <ThemeSwitch className="flex items-center space-x-[12px] " />
