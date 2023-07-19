@@ -50,9 +50,9 @@ export default function RootLayout({
             >
                 <Providers>
                     <Header />
-                    {/* <SidebarWrapper /> */}
+                    <SidebarWrapper />
                     <DeleteModal />
-                    <div className="mt-[56px] md:mt-[72px]">{children}</div>
+                    {/* <div className="mt-[56px] md:mt-[72px]">{children}</div> */}
                     <Toaster
                         toastOptions={{
                             loading: {
