@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
         })
     }
     return (
-        <m.aside
+        <aside
             // initial={{
             //     x: -300,
             //     opacity: 0,
@@ -71,7 +71,7 @@ const Sidebar: React.FC = () => {
                     />
                 </div>
             </div>
-        </m.aside>
+        </aside>
     )
 }
 
