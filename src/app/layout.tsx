@@ -52,7 +52,7 @@ export default function RootLayout({
                     <Header />
                     <SidebarWrapper />
                     <DeleteModal />
-                    {/* <div className="mt-[56px] md:mt-[72px]">{children}</div> */}
+                    <div className="mt-[56px] md:mt-[72px]">{children}</div>
                     <Toaster
                         toastOptions={{
                             loading: {
