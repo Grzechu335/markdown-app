@@ -35,19 +35,19 @@ const Sidebar: React.FC = () => {
         })
     }
     return (
-        <aside
-            // initial={{
-            //     x: -300,
-            //     opacity: 0,
-            // }}
-            // animate={{
-            //     x: 0,
-            //     opacity: 1,
-            // }}
-            // exit={{ x: -300, opacity: 0 }}
-            // transition={{
-            //     duration: 0.2,
-            // }}
+        <m.aside
+            initial={{
+                x: -300,
+                opacity: 0,
+            }}
+            animate={{
+                x: 0,
+                opacity: 1,
+            }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{
+                duration: 0.2,
+            }}
             className="fixed left-0 top-0 h-[100%] bg-900 p-6 w-[250px] z-[999]"
         >
             <div className="flex flex-col justify-between h-full">
@@ -59,7 +59,7 @@ const Sidebar: React.FC = () => {
                     <CustomButton onClick={createNewFile}>
                         <span>+ New Document</span>
                     </CustomButton>
-                    <Documents />
+                    {/* <Documents /> */}
                 </div>
                 <div className="flex items-center justify-between">
                     <ThemeSwitch className="flex items-center space-x-[12px] " />
@@ -71,7 +71,7 @@ const Sidebar: React.FC = () => {
                     />
                 </div>
             </div>
-        </aside>
+        </m.aside>
     )
 }
 

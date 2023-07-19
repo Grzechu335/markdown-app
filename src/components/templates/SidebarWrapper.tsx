@@ -6,11 +6,7 @@ import { useUIContext } from '../../../context/UIContext'
 
 const SidebarWrapper: React.FC = () => {
     const { sidebar } = useUIContext()
-    return (
-        // <AnimatePresence>
-        <>{sidebar && <Sidebar />}</>
-        // </AnimatePresence >
-    )
+    return <AnimatePresence>{sidebar && <Sidebar />}</AnimatePresence>
 }
 
 export default SidebarWrapper
