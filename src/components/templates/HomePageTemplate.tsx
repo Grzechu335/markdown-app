@@ -48,7 +48,10 @@ const HomePageTemplate: React.FC = () => {
                         />
                     )
                 ) : null}
-                {files?.length !== 0 ? (
+
+                <MarkdownCode />
+
+                {/* {files?.length !== 0 ? (
                     <React.Fragment>
                         <MarkdownCode />
                         <AnimatePresence initial={false}>
@@ -68,7 +71,7 @@ const HomePageTemplate: React.FC = () => {
                             </p>
                         </div>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     )
