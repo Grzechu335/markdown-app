@@ -36,18 +36,18 @@ const Sidebar: React.FC = () => {
     }
     return (
         <m.aside
-            initial={{
-                x: -300,
-                opacity: 0,
-            }}
-            animate={{
-                x: 0,
-                opacity: 1,
-            }}
-            exit={{ x: -300, opacity: 0 }}
-            transition={{
-                duration: 0.2,
-            }}
+            // initial={{
+            //     x: -300,
+            //     opacity: 0,
+            // }}
+            // animate={{
+            //     x: 0,
+            //     opacity: 1,
+            // }}
+            // exit={{ x: -300, opacity: 0 }}
+            // transition={{
+            //     duration: 0.2,
+            // }}
             className="fixed left-0 top-0 h-[100%] bg-900 p-6 w-[250px] z-[999]"
         >
             <div className="flex flex-col justify-between h-full">
