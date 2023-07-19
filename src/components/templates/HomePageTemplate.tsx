@@ -33,7 +33,7 @@ const HomePageTemplate: React.FC = () => {
             )}
         >
             <div className="relative flex flex-grow h-full lg:grid-cols-2 ">
-                {/* {files?.length !== 0 ? (
+                {files?.length !== 0 ? (
                     !preview ? (
                         <OpenedEyeIcon
                             className="absolute cursor-pointer right-4 top-[calc(42px/2)] transform translate-y-[-50%] z-50 text-500 dark:text-400 hover:!text-orange"
@@ -47,7 +47,7 @@ const HomePageTemplate: React.FC = () => {
                             onClick={togglePreview}
                         />
                     )
-                ) : null} */}
+                ) : null}
                 {files?.length !== 0 ? (
                     <React.Fragment>
                         <MarkdownCode />
