@@ -57,7 +57,7 @@ const Header: React.FC = () => {
             >
                 <div
                     onClick={toggleSidebar}
-                    className="grid place-content-center w-[56px] h-[56px] md:w-[72px] md:h-[72px] bg-700 cursor-pointer hover:bg-orange transition-colors duration-200"
+                    className="grid place-content-center flex-shrink-0 w-[56px] h-[56px] md:w-[72px] md:h-[72px] bg-700 cursor-pointer hover:bg-orange transition-colors duration-200"
                 >
                     {!sidebar ? (
                         <HamburgerMenuIcon
@@ -98,7 +98,7 @@ const Header: React.FC = () => {
                                 type="text"
                             />
                         ) : (
-                            <p className="text-red-500 heading-md">
+                            <p className="text-red-500 heading-md whitespace-nowrap">
                                 No files found
                             </p>
                         )}
