@@ -6,7 +6,7 @@ import { useMarkdownContext } from '../../../../context/MarkdownContext'
 const MarkdownCode: React.FC = () => {
     const { input, changeInput } = useMarkdownContext()
     return (
-        <div className="absolute flex flex-col flex-1 w-full h-full md:static ">
+        <div className="absolute flex flex-col flex-1 w-full h-full pb-10 md:static">
             <MarkdownHeading>Markdown</MarkdownHeading>
             <textarea
                 value={input}
