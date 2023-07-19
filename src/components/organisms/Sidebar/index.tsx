@@ -48,7 +48,7 @@ const Sidebar: React.FC = () => {
             transition={{
                 duration: 0.2,
             }}
-            className="fixed left-0 top-0 bottom-0 bg-900 p-6 w-[250px] z-[999]"
+            className="fixed left-0 top-0 h-[100%] bg-900 p-6 w-[250px] z-[999]"
         >
             <div className="flex flex-col justify-between h-full">
                 <div className="flex flex-col h-full space-y-6">

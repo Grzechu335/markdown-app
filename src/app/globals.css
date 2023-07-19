@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        @apply h-[100%];
+    }
     body {
-        @apply overflow-x-hidden bg-100 dark:bg-1000;
+        @apply overflow-x-hidden bg-100 dark:bg-1000 h-[100%];
     }
 }
 
