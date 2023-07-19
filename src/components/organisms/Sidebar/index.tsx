@@ -61,7 +61,7 @@ const Sidebar: React.FC = () => {
                     </CustomButton>
                     <Documents />
                 </div>
-                <div className="flex items-center justify-between mb-28 md:mb-0">
+                <div className="flex items-center justify-between">
                     <ThemeSwitch className="flex items-center space-x-[12px] " />
                     <SignOutIcon
                         size={20}
