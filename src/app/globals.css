@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        @apply overflow-hidden;
+    }
     body {
         @apply overflow-x-hidden bg-100 dark:bg-1000;
     }
