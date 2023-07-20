@@ -29,9 +29,9 @@ const useGetFileById = () => {
         }
     }, [selectedFileId])
     useEffect(() => {
-        // if (session) {
-        refreshFile()
-        // }
+        if (session) {
+            refreshFile()
+        }
     }, [selectedFileId, refreshFile, session])
     return { file, loading }
 }

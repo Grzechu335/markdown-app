@@ -7,11 +7,8 @@ export async function GET() {
     const session = await getServerSession(authOptions)
     try {
         const file = await prisma.markdownFile.findMany({
-            // where: {
-            //     authorId: session?.user.id,
-            // },
             where: {
-                authorId: 'clk70z64v0000yb7dpdju5ioa',
+                authorId: session?.user.id,
             },
             orderBy: {
                 updatedAt: 'desc',

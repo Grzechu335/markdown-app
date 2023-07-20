@@ -17,12 +17,10 @@ export async function POST(req: Request) {
             return NextResponse.json(file)
         } else {
             const file = await prisma.markdownFile.findFirst({
-                // where: {
-                //     authorId: session?.user.id,
-                // },
                 where: {
-                    authorId: 'clk70z64v0000yb7dpdju5ioa',
+                    authorId: session?.user.id,
                 },
+
                 orderBy: {
                     updatedAt: 'desc',
                 },

@@ -16,12 +16,12 @@ import ReactFocusLock from 'react-focus-lock'
 
 const HomePageTemplate: React.FC = () => {
     const router = useRouter()
-    // const session = useSession({
-    //     required: true,
-    //     onUnauthenticated: () => {
-    //         router.push('/auth/signin')
-    //     },
-    // })
+    const session = useSession({
+        required: true,
+        onUnauthenticated: () => {
+            router.push('/auth/signin')
+        },
+    })
     const { sidebar, preview, togglePreview } = useUIContext()
     const { files } = useGetAllFiles()
     return (
