@@ -24,9 +24,9 @@ const useGetAllFiles = () => {
         }
     }, [])
     useEffect(() => {
-        if (session) {
-            getFiles()
-        }
+        // if (session) {
+        getFiles()
+        // }
     }, [getFiles, selectedFileId, session])
     return { files, loading }
 }

@@ -4,10 +4,10 @@
 
 @layer base {
     html {
-        @apply h-[100%];
+        @apply h-[100%] overflow-hidden;
     }
     body {
-        @apply overflow-hidden bg-100 dark:bg-1000 h-[100%];
+        @apply bg-100 dark:bg-1000 h-[100%] overflow-y-hidden scrollbar-none;
     }
 }
 
