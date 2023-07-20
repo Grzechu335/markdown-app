@@ -57,7 +57,7 @@ const Header: React.FC = () => {
             >
                 <div
                     onClick={toggleSidebar}
-                    className="grid place-content-center w-[56px] h-[56px] md:w-[72px] md:h-[72px] bg-700 cursor-pointer hover:bg-orange transition-colors duration-200"
+                    className="grid place-content-center flex-shrink-0 w-[56px] h-[56px] md:w-[72px] md:h-[72px] bg-700 cursor-pointer hover:bg-orange transition-colors duration-200"
                 >
                     {!sidebar ? (
                         <HamburgerMenuIcon
@@ -94,11 +94,11 @@ const Header: React.FC = () => {
                                 disabled={files?.length === 0}
                                 value={fileName}
                                 onChange={(e) => changeFileName(e)}
-                                className="block outline-none disabled:cursor-not-allowed bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-100 cursor-pointer hover:text-orangeHover"
+                                className="block outline-none text-100 disabled:cursor-not-allowed bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-100 cursor-pointer hover:text-orangeHover"
                                 type="text"
                             />
                         ) : (
-                            <p className="text-red-500 heading-md">
+                            <p className="text-red-500 heading-md whitespace-nowrap">
                                 No files found
                             </p>
                         )}

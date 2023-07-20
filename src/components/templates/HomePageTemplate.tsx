@@ -12,6 +12,7 @@ import { clsxm } from '../../../utils/clsxm'
 import MarkdownCode from '../organisms/MarkdownCode'
 import MarkdownPreview from '../organisms/MarkdownPreview'
 import useGetAllFiles from '../../../hooks/useGetAllFiles'
+import ReactFocusLock from 'react-focus-lock'
 
 const HomePageTemplate: React.FC = () => {
     const router = useRouter()
@@ -26,13 +27,13 @@ const HomePageTemplate: React.FC = () => {
     return (
         <div
             className={clsxm(
-                'transition-transform transform overflow-hidden overflow-x-hidden h-[calc(100vh-56px)] md:h-[calc(100vh-72px)] md:max-h-[calc(100vh-72px)] max-h-[calc(100vh-56px)]  relative left-0 duration-200 bg-100 dark:bg-1000',
+                'transition-transform transform  overflow-hidden h-[calc(100vh-56px)] md:h-[calc(100vh-72px)] md:max-h-[calc(100vh-72px)] max-h-[calc(100vh-56px)]  relative left-0 duration-200 bg-100 dark:bg-1000',
                 {
                     'translate-x-[250px]': sidebar,
                 }
             )}
         >
-            <div className="relative flex flex-grow h-full lg:grid-cols-2 ">
+            <div className="relative flex flex-grow h-full overflow-y-hidden lg:grid-cols-2 ">
                 {files?.length !== 0 ? (
                     !preview ? (
                         <OpenedEyeIcon
@@ -48,17 +49,18 @@ const HomePageTemplate: React.FC = () => {
                         />
                     )
                 ) : null}
+
                 {files?.length !== 0 ? (
-                    <React.Fragment>
+                    <>
                         <MarkdownCode />
                         <AnimatePresence initial={false}>
                             {preview ? (
                                 <MarkdownPreview key="markdown preview" />
                             ) : null}
                         </AnimatePresence>
-                    </React.Fragment>
+                    </>
                 ) : (
-                    <div className="fixed top-0 bottom-0 left-0 grid w-screen place-content-center">
+                    <div className="fixed top-0 left-0 grid w-screen h-full place-content-center">
                         <div className="flex flex-col items- w-[300px] text-center font-mono">
                             <p>There is no markdown files on your account.</p>
                             <br />

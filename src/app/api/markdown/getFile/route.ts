@@ -20,6 +20,7 @@ export async function POST(req: Request) {
                 where: {
                     authorId: session?.user.id,
                 },
+
                 orderBy: {
                     updatedAt: 'desc',
                 },
