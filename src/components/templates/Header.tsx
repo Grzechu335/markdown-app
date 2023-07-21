@@ -96,7 +96,7 @@ const Header: React.FC = () => {
                                 disabled={files?.length === 0}
                                 value={fileName}
                                 onChange={(e) => changeFileName(e)}
-                                className="block outline-none text-100 disabled:cursor-not-allowed bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-b-100 cursor-pointer hover:text-orangeHover"
+                                className="block outline-none  text-100 disabled:cursor-not-allowed rounded-none bg-800 heading-md focus:text-orange focus:border-b-[1px] focus:border-b-100 cursor-pointer hover:text-orangeHover"
                                 type="text"
                             />
                         ) : (
