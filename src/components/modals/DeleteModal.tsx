@@ -18,7 +18,7 @@ const DeleteModal: React.FC = () => {
                 toggleDeleteModal()
                 setInputToValue('')
                 // @ts-ignore
-                changeSelectedFileId(res.id)
+                changeSelectedFileId(res?.id)
                 return 'File was deleted'
             },
             loading: 'Deleting file...',

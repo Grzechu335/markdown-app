@@ -5,6 +5,12 @@ import { authOptions } from '../../../../../lib/auth'
 
 export async function GET() {
     const session = await getServerSession(authOptions)
+
+    if (!session)
+        return NextResponse.json(
+            { message: 'User not authenticated' },
+            { status: 400 }
+        )
     try {
         const file = await prisma.markdownFile.findMany({
             where: {

@@ -15,13 +15,13 @@ const useGetFileById = () => {
         setLoading(true)
         try {
             const res: MarkdownFile = await fetch('/api/markdown/getFile', {
-                body: JSON.stringify({ fileId: selectedFileId }),
+                body: JSON.stringify({ id: selectedFileId }),
                 method: 'POST',
             }).then((res) => res.json())
             setLoading(false)
             setFile(res)
-            setInputToValue(res.text)
-            setFileNameToValue(res.name)
+            setInputToValue(res?.text)
+            setFileNameToValue(res?.name)
         } catch (err) {
             console.error(err)
         } finally {

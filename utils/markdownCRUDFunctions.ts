@@ -36,7 +36,7 @@ export const deleteMarkdownFile = async ({
     try {
         // delete file
         await fetch('/api/markdown/deleteFile', {
-            method: 'DELETE',
+            method: 'POST',
             body: JSON.stringify({ selectedFileId }),
             headers: {
                 'Content-Type': 'application/json',

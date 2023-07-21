@@ -22,8 +22,7 @@ import useGetAllFiles from '../../../hooks/useGetAllFiles'
 const Header: React.FC = () => {
     const path = usePathname()
     const { file, loading } = useGetFileById()
-    const { input, fileName, changeFileName, selectedFileId } =
-        useMarkdownContext()
+    const { input, fileName, changeFileName } = useMarkdownContext()
     const { toggleDeleteModal, sidebar, toggleSidebar } = useUIContext()
     const { files } = useGetAllFiles()
     const updateFile = () => {

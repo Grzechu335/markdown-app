@@ -4,10 +4,28 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '../../../../../lib/auth'
 
 export async function POST(req: Request) {
-    const { fileId } = (await req.json()) as { fileId: string | null }
     const session = await getServerSession(authOptions)
+
+    if (!session)
+        return NextResponse.json(
+            { message: 'User not authenticated' },
+            { status: 400 }
+        )
+
+    let fileId
+
     try {
-        if (fileId !== null) {
+        const { id } = (await req.json()) as { id: string | undefined }
+        fileId = id
+    } catch {
+        return NextResponse.json({
+            error: 'Markdown file ID required',
+            status: 400,
+        })
+    }
+
+    try {
+        if (fileId !== undefined) {
             const file = await prisma.markdownFile.findUnique({
                 where: {
                     id: fileId,

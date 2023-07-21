@@ -5,22 +5,26 @@ import { authOptions } from '../../../../../lib/auth'
 
 export async function GET() {
     const session = await getServerSession(authOptions)
-    if (session) {
-        try {
-            const latestFile = await prisma.markdownFile.findFirst({
-                where: {
-                    authorId: session.user.id,
-                },
-                orderBy: {
-                    updatedAt: 'desc',
-                },
-            })
-            return NextResponse.json(latestFile)
-        } catch (err) {
-            return NextResponse.json({
-                error: 'Failed fetch markdown file',
-                status: 400,
-            })
-        }
+
+    if (!session)
+        return NextResponse.json(
+            { message: 'User not authenticated' },
+            { status: 400 }
+        )
+    try {
+        const latestFile = await prisma.markdownFile.findFirst({
+            where: {
+                authorId: session.user.id,
+            },
+            orderBy: {
+                updatedAt: 'desc',
+            },
+        })
+        return NextResponse.json(latestFile)
+    } catch (err) {
+        return NextResponse.json({
+            error: 'Failed fetch markdown file',
+            status: 400,
+        })
     }
 }
