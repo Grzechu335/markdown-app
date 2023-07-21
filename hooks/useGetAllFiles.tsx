@@ -1,10 +1,15 @@
 'use client'
+
+export const revalidate = 0
+
 import { MarkdownFile } from '@prisma/client'
 import { useCallback, useEffect, useState } from 'react'
 import { useMarkdownContext } from '../context/MarkdownContext'
 import { useSession } from 'next-auth/react'
+import { useRefetch } from '../context/RefetchContext'
 
 const useGetAllFiles = () => {
+    const { refetchFlag } = useRefetch()
     const [files, setFiles] = useState<MarkdownFile[] | null>(null)
     const [loading, setLoading] = useState(false)
     const { selectedFileId } = useMarkdownContext()
@@ -14,6 +19,7 @@ const useGetAllFiles = () => {
         try {
             const res = await fetch('/api/markdown/getAllFiles', {
                 method: 'GET',
+                cache: 'no-store',
             }).then((res) => res.json())
             setLoading(false)
             setFiles(res)
@@ -23,11 +29,12 @@ const useGetAllFiles = () => {
             setLoading(false)
         }
     }, [])
+
     useEffect(() => {
         if (session) {
             getFiles()
         }
-    }, [getFiles, selectedFileId, session])
+    }, [getFiles, selectedFileId, session, refetchFlag])
     return { files, loading }
 }
 

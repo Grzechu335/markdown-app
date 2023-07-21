@@ -18,6 +18,7 @@ import { updateMarkdownFile } from '../../../utils/markdownCRUDFunctions'
 import CustomButton from '../atoms/CustomButton'
 import { toast } from 'react-hot-toast'
 import useGetAllFiles from '../../../hooks/useGetAllFiles'
+import { useRefetch } from '../../../context/RefetchContext'
 
 const Header: React.FC = () => {
     const path = usePathname()
@@ -25,6 +26,7 @@ const Header: React.FC = () => {
     const { input, fileName, changeFileName } = useMarkdownContext()
     const { toggleDeleteModal, sidebar, toggleSidebar } = useUIContext()
     const { files } = useGetAllFiles()
+    const { triggerRefetch } = useRefetch()
     const updateFile = () => {
         toast.promise(
             updateMarkdownFile({
@@ -35,6 +37,7 @@ const Header: React.FC = () => {
             {
                 success: (res) => {
                     if (!res?.ok) throw new Error()
+                    triggerRefetch()
                     return 'File was updated'
                 },
                 loading: 'Updating file...',

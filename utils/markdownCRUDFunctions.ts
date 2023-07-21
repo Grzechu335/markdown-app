@@ -15,7 +15,7 @@ export const updateMarkdownFile = async ({
         text,
     }
     try {
-        const res = await fetch('/api/markdown/saveFile', {
+        const res = await fetch('/api/markdown/updateFile', {
             headers: {
                 'Content-Type': 'application/json',
             },

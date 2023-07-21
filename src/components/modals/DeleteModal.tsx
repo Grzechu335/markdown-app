@@ -6,11 +6,13 @@ import { useMarkdownContext } from '../../../context/MarkdownContext'
 import { useUIContext } from '../../../context/UIContext'
 import { deleteMarkdownFile } from '../../../utils/markdownCRUDFunctions'
 import CustomButton from '../atoms/CustomButton'
+import { useRefetch } from '../../../context/RefetchContext'
 
 const DeleteModal: React.FC = () => {
     const { fileName, selectedFileId, changeSelectedFileId, setInputToValue } =
         useMarkdownContext()
     const { deleteModal, toggleDeleteModal } = useUIContext()
+    const { triggerRefetch } = useRefetch()
     const deleteFile = async () => {
         toast.promise(deleteMarkdownFile({ selectedFileId }), {
             success: (res) => {
@@ -19,6 +21,7 @@ const DeleteModal: React.FC = () => {
                 setInputToValue('')
                 // @ts-ignore
                 changeSelectedFileId(res?.id)
+                triggerRefetch()
                 return 'File was deleted'
             },
             loading: 'Deleting file...',

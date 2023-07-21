@@ -9,8 +9,14 @@ import { useMarkdownContext } from '../../../../context/MarkdownContext'
 import { useUIContext } from '../../../../context/UIContext'
 import { createNewMarkdownFile } from '../../../../utils/markdownCRUDFunctions'
 import Documents from '../Documents'
+import { MarkdownFile } from '@prisma/client'
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+    markdowns: MarkdownFile[] | null
+    loading: boolean
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ loading, markdowns }) => {
     const { data: session } = useSession()
 
     const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
@@ -59,7 +65,10 @@ const Sidebar: React.FC = () => {
                     <CustomButton onClick={createNewFile}>
                         <span>+ New Document</span>
                     </CustomButton>
-                    <Documents />
+                    <Documents
+                        markdowns={markdowns}
+                        loading={loading}
+                    />
                 </div>
                 <div className="flex items-center justify-between">
                     <ThemeSwitch className="flex items-center space-x-[12px] " />

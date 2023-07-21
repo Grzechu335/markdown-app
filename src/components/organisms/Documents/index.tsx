@@ -6,10 +6,16 @@ import useGetAllFiles from '../../../../hooks/useGetAllFiles'
 import { clsxm } from '../../../../utils/clsxm'
 import dateFormatter from '../../../../utils/dateFormatter'
 import Skeleton from 'react-loading-skeleton'
+import { MarkdownFile } from '@prisma/client'
 
-const Documents: React.FC = () => {
+interface DocumentsProps {
+    markdowns: MarkdownFile[] | null
+    loading: boolean
+}
+
+const Documents: React.FC<DocumentsProps> = ({ loading, markdowns }) => {
     const { changeSelectedFileId, selectedFileId } = useMarkdownContext()
-    const { files: markdowns, loading } = useGetAllFiles()
+
     return (
         <>
             {!loading ? (
