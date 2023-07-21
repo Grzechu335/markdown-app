@@ -33,7 +33,7 @@ const useGetAllFiles = () => {
         if (session) {
             getFiles()
         }
-    }, [session, refetchFlag])
+    }, [session, getFiles])
     return { files, loading }
 }
 
