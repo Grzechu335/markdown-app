@@ -12,8 +12,8 @@ const useGetAllFiles = () => {
     const { refetchFlag } = useRefetch()
     const [files, setFiles] = useState<MarkdownFile[] | null>(null)
     const [loading, setLoading] = useState(false)
-    const { selectedFileId } = useMarkdownContext()
     const { data: session } = useSession()
+    const { selectedFileId } = useMarkdownContext()
     const getFiles = useCallback(async () => {
         setLoading(true)
         try {
@@ -33,7 +33,7 @@ const useGetAllFiles = () => {
         if (session) {
             getFiles()
         }
-    }, [session, getFiles])
+    }, [session, getFiles, refetchFlag])
     return { files, loading }
 }
 
