@@ -6,11 +6,11 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
     const session = await getServerSession(authOptions)
-    // if (!session)
-    //     return NextResponse.json(
-    //         { message: 'User not authenticated' },
-    //         { status: 400 }
-    //     )
+    if (!session)
+        return NextResponse.json(
+            { message: 'User not authenticated' },
+            { status: 400 }
+        )
 
     let updatedFile
 
