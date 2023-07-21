@@ -19,7 +19,6 @@ const useGetAllFiles = () => {
         try {
             const res = await fetch('/api/markdown/getAllFiles', {
                 method: 'GET',
-                cache: 'no-store',
             }).then((res) => res.json())
             setLoading(false)
             setFiles(res)
@@ -34,7 +33,7 @@ const useGetAllFiles = () => {
         if (session) {
             getFiles()
         }
-    }, [getFiles, selectedFileId, session, refetchFlag])
+    }, [selectedFileId, session, refetchFlag])
     return { files, loading }
 }
 
