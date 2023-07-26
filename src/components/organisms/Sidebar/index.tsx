@@ -6,24 +6,18 @@ import { signOut, useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 import { GoSignOut as SignOutIcon } from 'react-icons/go'
 import { useMarkdownContext } from '../../../../context/MarkdownContext'
-import { useUIContext } from '../../../../context/UIContext'
 import { createNewMarkdownFile } from '../../../../utils/markdownCRUDFunctions'
 import Documents from '../Documents'
-import { MarkdownFile } from '@prisma/client'
 import { useRefetch } from '../../../../context/RefetchContext'
+import { useAppDispatch } from '../../../../redux/store'
+import { toggleSidebar } from '../../../../redux/slices/UISlice'
 
-interface SidebarProps {
-    markdowns: MarkdownFile[] | null
-    loading: boolean
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ loading, markdowns }) => {
+const Sidebar: React.FC = () => {
     const { data: session } = useSession()
-
+    const dispatch = useAppDispatch()
     const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
         useMarkdownContext()
     const { triggerRefetch } = useRefetch()
-    const { toggleSidebar } = useUIContext()
     const createNewFile = async () => {
         toast.promise(createNewMarkdownFile(), {
             success: (res) => {
@@ -34,12 +28,15 @@ const Sidebar: React.FC<SidebarProps> = ({ loading, markdowns }) => {
                 setFileNameToValue(res?.name!)
                 // @ts-ignore
                 changeSelectedFileId(res?.id!)
-                toggleSidebar()
                 triggerRefetch()
+                dispatch(toggleSidebar())
                 return 'File was created'
             },
             loading: 'Creating file...',
-            error: 'Something went wrong while creating file',
+            error: () => {
+                dispatch(toggleSidebar())
+                return 'Something went wrong while creating file'
+            },
         })
     }
     return (
@@ -59,7 +56,7 @@ const Sidebar: React.FC<SidebarProps> = ({ loading, markdowns }) => {
             className="fixed left-0 top-0 h-[100%] bg-900 p-6 w-[250px] z-[999]"
         >
             <div className="flex flex-col justify-between h-full">
-                <div className="flex flex-col h-full space-y-6">
+                <div className="flex flex-col h-full pb-4 space-y-6 overflow-y-scroll scrollbar-none">
                     <h2 className="uppercase heading-sm text-500">
                         <span className="text-100">{session?.user?.name}</span>{' '}
                         <br /> documents
@@ -67,13 +64,10 @@ const Sidebar: React.FC<SidebarProps> = ({ loading, markdowns }) => {
                     <CustomButton onClick={createNewFile}>
                         <span>+ New Document</span>
                     </CustomButton>
-                    <Documents
-                        markdowns={markdowns}
-                        loading={loading}
-                    />
+                    <Documents />
                 </div>
-                <div className="flex items-center justify-between">
-                    <ThemeSwitch className="flex items-center space-x-[12px] " />
+                <div className="flex items-center justify-between flex-shrink-0">
+                    <ThemeSwitch className="flex items-center space-x-[12px]" />
                     <SignOutIcon
                         size={20}
                         className="cursor-pointer"

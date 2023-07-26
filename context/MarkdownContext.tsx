@@ -7,8 +7,13 @@ import React, {
     useMemo,
     useState,
 } from 'react'
-import useGetAllFiles from '../hooks/useGetAllFiles'
 import useGetFileById from '../hooks/useGetFileById'
+import {
+    fetchMarkdownFiles,
+    filesSelector,
+} from '../redux/slices/markdownSlice'
+import { useAppDispatch, useAppSelector } from '../redux/store'
+import { useRefetch } from './RefetchContext'
 
 type MarkdownContextType = {
     input: string
@@ -35,11 +40,19 @@ const MarkdownContext = createContext<MarkdownContextType>({
 export const MarkdownContextProvider: React.FC<{
     children: React.ReactNode
 }> = ({ children }) => {
+    const dispatch = useAppDispatch()
+    const { data: files } = useAppSelector(filesSelector)
+
     const { file } = useGetFileById()
+    const { refetchFlag } = useRefetch()
+
     const [input, setInput] = useState<string>(file?.text ?? '')
     const [selectedFileId, setSelectedFileId] = useState<string | undefined>()
     const [fileName, setFileName] = useState<string>(file?.name ?? '')
-    const { files } = useGetAllFiles()
+
+    useEffect(() => {
+        dispatch(fetchMarkdownFiles())
+    }, [dispatch, refetchFlag])
 
     useEffect(() => {
         if (selectedFileId === undefined && files && files?.length > 0) {

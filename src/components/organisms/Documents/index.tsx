@@ -2,27 +2,22 @@
 import React from 'react'
 import { GoFile as FileIcon } from 'react-icons/go'
 import { useMarkdownContext } from '../../../../context/MarkdownContext'
-import useGetAllFiles from '../../../../hooks/useGetAllFiles'
 import { clsxm } from '../../../../utils/clsxm'
 import dateFormatter from '../../../../utils/dateFormatter'
 import Skeleton from 'react-loading-skeleton'
-import { MarkdownFile } from '@prisma/client'
+import { useAppSelector } from '../../../../redux/store'
+import { filesSelector } from '../../../../redux/slices/markdownSlice'
 
-interface DocumentsProps {
-    markdowns: MarkdownFile[] | null
-    loading: boolean
-}
-
-const Documents: React.FC<DocumentsProps> = ({ loading, markdowns }) => {
+const Documents: React.FC = () => {
     const { changeSelectedFileId, selectedFileId } = useMarkdownContext()
-
+    const { isLoading, data } = useAppSelector(filesSelector)
     return (
         <>
-            {!loading ? (
+            {!isLoading ? (
                 <div className="space-y-[26px] h-full flex flex-col flex-grow overflow-y-scroll scrollbar-none overflow-x-hidden">
-                    {markdowns &&
-                        markdowns.length > 0 &&
-                        markdowns?.map((file) => (
+                    {data &&
+                        data.length > 0 &&
+                        data?.map((file) => (
                             <div
                                 key={file.id}
                                 className={clsxm(

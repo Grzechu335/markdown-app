@@ -3,21 +3,26 @@ import { AnimatePresence, motion as m } from 'framer-motion'
 import React from 'react'
 import { toast } from 'react-hot-toast'
 import { useMarkdownContext } from '../../../context/MarkdownContext'
-import { useUIContext } from '../../../context/UIContext'
 import { deleteMarkdownFile } from '../../../utils/markdownCRUDFunctions'
 import CustomButton from '../atoms/CustomButton'
 import { useRefetch } from '../../../context/RefetchContext'
+import { useAppDispatch, useAppSelector } from '../../../redux/store'
+import {
+    deleteModalSelector,
+    toggleDeleteModal,
+} from '../../../redux/slices/UISlice'
 
 const DeleteModal: React.FC = () => {
     const { fileName, selectedFileId, changeSelectedFileId, setInputToValue } =
         useMarkdownContext()
-    const { deleteModal, toggleDeleteModal } = useUIContext()
+    const deleteModal = useAppSelector(deleteModalSelector)
+    const dispatch = useAppDispatch()
     const { triggerRefetch } = useRefetch()
     const deleteFile = async () => {
         toast.promise(deleteMarkdownFile({ selectedFileId }), {
             success: (res) => {
                 if (!res.ok) throw new Error()
-                toggleDeleteModal()
+                dispatch(toggleDeleteModal())
                 setInputToValue('')
                 // @ts-ignore
                 changeSelectedFileId(res?.id)
@@ -32,7 +37,7 @@ const DeleteModal: React.FC = () => {
         <AnimatePresence>
             {deleteModal && (
                 <m.div
-                    onClick={toggleDeleteModal}
+                    onClick={() => dispatch(toggleDeleteModal())}
                     className="fixed left-0 top-0 w-screen h-screen z-[1000] bg-1000/50 flex justify-center items-center"
                 >
                     <div

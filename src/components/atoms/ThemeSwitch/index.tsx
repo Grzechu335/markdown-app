@@ -11,7 +11,6 @@ type ThemeSwitchProps = {
 
 const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ className }) => {
     const [mounted, setMounted] = useState(false)
-
     const { theme, setTheme } = useTheme()
 
     const toggleTheme = () => {

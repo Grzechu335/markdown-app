@@ -1,21 +1,27 @@
 'use client'
 import { AnimatePresence } from 'framer-motion'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import React from 'react'
 import {
     BsEyeSlashFill as ClosedEyeIcon,
     BsEyeFill as OpenedEyeIcon,
 } from 'react-icons/bs'
-import { useUIContext } from '../../../context/UIContext'
+import { filesSelector } from '../../../redux/slices/markdownSlice'
+import { useAppDispatch, useAppSelector } from '../../../redux/store'
 import { clsxm } from '../../../utils/clsxm'
 import MarkdownCode from '../organisms/MarkdownCode'
 import MarkdownPreview from '../organisms/MarkdownPreview'
-import useGetAllFiles from '../../../hooks/useGetAllFiles'
+import {
+    previewSelector,
+    sidebarSelector,
+    togglePreview,
+} from '../../../redux/slices/UISlice'
 
 const HomePageTemplate: React.FC = () => {
-    const { sidebar, preview, togglePreview } = useUIContext()
-    const { files } = useGetAllFiles()
+    const dispatch = useAppDispatch()
+    const { data } = useAppSelector(filesSelector)
+    const sidebar = useAppSelector(sidebarSelector)
+    const preview = useAppSelector(previewSelector)
+
     return (
         <div
             className={clsxm(
@@ -26,23 +32,23 @@ const HomePageTemplate: React.FC = () => {
             )}
         >
             <div className="relative flex flex-grow h-full overflow-y-hidden lg:grid-cols-2 ">
-                {files?.length !== 0 ? (
+                {data?.length !== 0 ? (
                     !preview ? (
                         <OpenedEyeIcon
                             className="absolute cursor-pointer right-4 top-[calc(42px/2)] transform translate-y-[-50%] z-50 text-500 dark:text-400 hover:!text-orange"
                             size={20}
-                            onClick={togglePreview}
+                            onClick={() => dispatch(togglePreview())}
                         />
                     ) : (
                         <ClosedEyeIcon
                             className="absolute cursor-pointer right-4 top-[calc(42px/2)] transform translate-y-[-50%] z-50 text-500 dark:text-400 hover:!text-orange"
                             size={20}
-                            onClick={togglePreview}
+                            onClick={() => dispatch(togglePreview())}
                         />
                     )
                 ) : null}
 
-                {files?.length !== 0 ? (
+                {data?.length !== 0 ? (
                     <>
                         <MarkdownCode />
                         <AnimatePresence initial={false}>
