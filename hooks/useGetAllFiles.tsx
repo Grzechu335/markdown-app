@@ -3,9 +3,8 @@
 export const revalidate = 0
 
 import { MarkdownFile } from '@prisma/client'
-import { useCallback, useEffect, useState } from 'react'
-import { useMarkdownContext } from '../context/MarkdownContext'
 import { useSession } from 'next-auth/react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRefetch } from '../context/RefetchContext'
 
 const useGetAllFiles = () => {

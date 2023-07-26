@@ -36,9 +36,9 @@ export const MarkdownContextProvider: React.FC<{
     children: React.ReactNode
 }> = ({ children }) => {
     const { file } = useGetFileById()
-    const [input, setInput] = useState<string>(file?.text || '')
+    const [input, setInput] = useState<string>(file?.text ?? '')
     const [selectedFileId, setSelectedFileId] = useState<string | undefined>()
-    const [fileName, setFileName] = useState<string>(file?.name!)
+    const [fileName, setFileName] = useState<string>(file?.name ?? '')
     const { files } = useGetAllFiles()
 
     useEffect(() => {

@@ -10,6 +10,7 @@ import { useUIContext } from '../../../../context/UIContext'
 import { createNewMarkdownFile } from '../../../../utils/markdownCRUDFunctions'
 import Documents from '../Documents'
 import { MarkdownFile } from '@prisma/client'
+import { useRefetch } from '../../../../context/RefetchContext'
 
 interface SidebarProps {
     markdowns: MarkdownFile[] | null
@@ -21,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ loading, markdowns }) => {
 
     const { setInputToValue, setFileNameToValue, changeSelectedFileId } =
         useMarkdownContext()
-
+    const { triggerRefetch } = useRefetch()
     const { toggleSidebar } = useUIContext()
     const createNewFile = async () => {
         toast.promise(createNewMarkdownFile(), {
@@ -34,6 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ loading, markdowns }) => {
                 // @ts-ignore
                 changeSelectedFileId(res?.id!)
                 toggleSidebar()
+                triggerRefetch()
                 return 'File was created'
             },
             loading: 'Creating file...',
