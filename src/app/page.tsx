@@ -1,9 +1,7 @@
 'use client'
 import HomePageTemplate from '@/components/templates/HomePageTemplate'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../../lib/auth'
-import { redirect } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 import { Oval } from 'react-loader-spinner'
 
 export default function Home() {
