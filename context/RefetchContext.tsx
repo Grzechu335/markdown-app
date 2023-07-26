@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useMemo, useState } from 'react'
 
 interface RefetchContextType {
     refetchFlag: boolean
@@ -16,8 +16,16 @@ export const RefetchProvider: React.FC<{ children: React.ReactNode }> = ({
         setRefetchFlag((prevFlag) => !prevFlag)
     }
 
+    const contextValue = useMemo(
+        () => ({
+            refetchFlag,
+            triggerRefetch,
+        }),
+        [refetchFlag]
+    )
+
     return (
-        <RefetchContext.Provider value={{ refetchFlag, triggerRefetch }}>
+        <RefetchContext.Provider value={contextValue}>
             {children}
         </RefetchContext.Provider>
     )

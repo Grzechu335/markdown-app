@@ -7,8 +7,8 @@ import React, {
     useMemo,
     useState,
 } from 'react'
-import useGetFileById from '../hooks/useGetFileById'
 import useGetAllFiles from '../hooks/useGetAllFiles'
+import useGetFileById from '../hooks/useGetFileById'
 
 type MarkdownContextType = {
     input: string
@@ -36,9 +36,9 @@ export const MarkdownContextProvider: React.FC<{
     children: React.ReactNode
 }> = ({ children }) => {
     const { file } = useGetFileById()
-    const [input, setInput] = useState<string>(file?.text || '')
+    const [input, setInput] = useState<string>(file?.text ?? '')
     const [selectedFileId, setSelectedFileId] = useState<string | undefined>()
-    const [fileName, setFileName] = useState<string>(file?.name!)
+    const [fileName, setFileName] = useState<string>(file?.name ?? '')
     const { files } = useGetAllFiles()
 
     useEffect(() => {

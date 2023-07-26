@@ -3,16 +3,14 @@
 export const revalidate = 0
 
 import { MarkdownFile } from '@prisma/client'
-import { useCallback, useEffect, useState } from 'react'
-import { useMarkdownContext } from '../context/MarkdownContext'
 import { useSession } from 'next-auth/react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRefetch } from '../context/RefetchContext'
 
 const useGetAllFiles = () => {
     const { refetchFlag } = useRefetch()
     const [files, setFiles] = useState<MarkdownFile[] | null>(null)
     const [loading, setLoading] = useState(false)
-    const { selectedFileId } = useMarkdownContext()
     const { data: session } = useSession()
     const getFiles = useCallback(async () => {
         setLoading(true)
@@ -33,7 +31,7 @@ const useGetAllFiles = () => {
         if (session) {
             getFiles()
         }
-    }, [session, getFiles])
+    }, [session, getFiles, refetchFlag])
     return { files, loading }
 }
 
