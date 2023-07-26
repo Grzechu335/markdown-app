@@ -23,8 +23,7 @@ const Documents: React.FC = () => {
                                 className={clsxm(
                                     'flex items-center px-3 py-1 space-x-4 rounded-md cursor-pointer group',
                                     {
-                                        'dark:bg-300/20':
-                                            file.id === selectedFileId,
+                                        'bg-300/20': file.id === selectedFileId,
                                     }
                                 )}
                                 onClick={() => changeSelectedFileId(file.id)}

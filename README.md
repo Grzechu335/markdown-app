@@ -1,7 +1,7 @@
 <div align='center'>
     <h1>Markdown App</h1>
     <p><i>Designed by Frontend Mentor</i></p>
-    <p><a href='hmarkdown-app-nine.vercel.app'>DEMO</a></p>
+    <p><a href='https://markdown-app-nine.vercel.app'>DEMO</a></p>
     <div>
         <img src='https://img.shields.io/github/deployments/grzechu335/markdown-app/production?style=for-the-badge'/>
         <img src='https://img.shields.io/github/license/grzechu335/markdown-app?style=for-the-badge'/>
