@@ -12,7 +12,6 @@ const useGetAllFiles = () => {
     const [files, setFiles] = useState<MarkdownFile[] | null>(null)
     const [loading, setLoading] = useState(false)
     const { data: session } = useSession()
-    const { selectedFileId } = useMarkdownContext()
     const getFiles = useCallback(async () => {
         setLoading(true)
         try {
